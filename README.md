@@ -1,2 +1,1 @@
-# orinbou.github.io
-Webページ
+# Webページ
