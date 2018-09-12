@@ -128,11 +128,13 @@ function getDeviceID() {
 
 // スクリーンキーボード表示
 function showScreenKeyboard(displayTabIdx) {
+alert('c1');
     var browser = getBrowser();
     // スペシャルビューア向け
  
-        
+        alert('c2');
             window.external.notify("showScreenKeyboard");
+            alert('c3');
 
    
 }

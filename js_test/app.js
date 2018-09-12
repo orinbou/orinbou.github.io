@@ -10,7 +10,7 @@ var showArrowButton = {
 
 $(function() {
 
-	
+	alert('a1');
 	// 文字入力の際にソフトウェアキーボードを表示する
 	initKeyboard();
 	
@@ -24,7 +24,9 @@ function initKeyboard() {
 	var showKeyboard = false;
 	// キーボード表示
 	$(document).on('click', 'input[type="text"]', function() {
+	alert('a2');
 		showScreenKeyboard(0);
+		alert('a3');
 		showKeyboard = true;
 	});
 	// input以外をタップしたときにキーボードを隠す
