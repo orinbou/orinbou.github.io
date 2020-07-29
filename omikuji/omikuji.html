@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Teamおみくじ</title>
+<script type="text/javascript">
+// パラメータ取得
+window.onload = function() {
+  var params = (new URL(document.location)).searchParams;
+  var defMembers = params.get('members');
+  document.getElementById('members').value = defMembers.replace(/,/g, '\n');
+}
+
+// 配列シャッフル処理
+function arrShuffle(arr){
+  var len = arr.length;
+  while(len > 0){
+    var rnd = Math.floor(Math.random() * len);
+    var tmp = arr[len-1];
+    arr[len-1] = arr[rnd];
+    arr[rnd] = tmp;
+    len-=1;
+  }
+}
+
+// おみくじ処理実行
+function doShuffle() {
+   //配列を取得
+   var members = document.getElementById('members').value.split('\n');
+
+   //配列をシャッフルする
+   arrShuffle(members);
+
+   //シャッフルした配列を表示する
+   document.getElementById("results").innerHTML = members.join("<br/>");
+}
+</script>
+</head>
+<body>
+<h1>Teamおみくじ</h1>
+<hr>
+<p>
+<input type="button" value="おみくじ" onclick="doShuffle();">
+<input type="button" value="リセット" onclick="window.location.reload();">
+</p>
+<textarea id='members' rows="5" cols="30"/></textarea>
+<p>
+<h3>今日の順番：</h3>
+ <span id="results">***</span>
+</p>
+</body>
+</html>
