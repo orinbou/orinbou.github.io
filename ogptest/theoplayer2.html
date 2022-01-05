@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://cdn.myth.theoplayer.com/52d7432c-3ab1-47b9-9e35-a3f04877eb08/ui.css">
+    <script src="https://cdn.myth.theoplayer.com/52d7432c-3ab1-47b9-9e35-a3f04877eb08/THEOplayer.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .theoplayer-container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="theoplayer-container video-js theoplayer-skin"></div>
+<script>
+
+    // https://stackoverflow.com/a/901144/588833
+    // function to get URL query parameters by name
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // initialize THEOplayer instance
+    var element = document.querySelector('.theoplayer-container');
+    var player = new THEOplayer.Player(element, {
+        libraryLocation: 'https://cdn.myth.theoplayer.com/52d7432c-3ab1-47b9-9e35-a3f04877eb08',
+        license: 'sZP7IYe6T6P1Co3l3Q0L36zrCS3lFSa_IlB-TD41TOzc0l5rTQBz0uec0uh6FOPlUY3zWokgbgjNIOf9fK3KIKht3oaiFD313K0-3uge06k6IDaiFDac0lbc3Dht3QBi06fVfK4_bQgZCYxNWoryIQXzImf90SCz3uai0uRi0u5i0Oi6Io4pIYP1UQgqWgjeCYxgflEc3l0r0SBr3lB_3lBiFOPeWok1dDrLYtA1Ioh6Tg-UFOPeWok1dDrLYt3qUYPlImf9DZfJf6i6WQjlCDcEWt3zf6i6UQ1gWtAVCYggb6rlWoz6Ymi6box7bZf9DZPEUQkV3mPUFOPLIDreYog-bwPgbt3NWo_6TGxZUD4j',
+        ui: {
+            width: '100%',
+            height: '100%'
+        },
+        isEmbeddable: true
+    });
+
+    // get query parameter values
+    var autoplay = getParameterByName("autoplay") && (getParameterByName("autoplay") == "true");
+    var muted = getParameterByName("muted")  && (getParameterByName("muted") == "true");
+    var preload = getParameterByName("preload");
+    var src = getParameterByName("src");
+
+    // set settings and stream URL
+    player.autoplay = autoplay;
+    player.muted = muted;
+    player.preload = preload;
+    player.src = src;
+</script>
+</body>
+</html>
