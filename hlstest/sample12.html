@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>動画</title>
+</head>
+<body>
+
+<h1>hls-samples</h1>
+
+<hr>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video id="video_smaple" controls></video>
+
+<script>
+if(Hls.isSupported()) {
+	var video = document.getElementById('video_smaple');
+	var hls = new Hls();
+	hls.loadSource('https://stg.dl.ndl.go.jp/contents/14991231/test_movie/bitrate_0500k/video_hls.m3u8');
+	hls.attachMedia(video);
+}
+</script>
+
+</body>
+</html>
