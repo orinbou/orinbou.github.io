@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>音声</title>
+</head>
+<body>
+
+<h1>hls-samples</h1>
+
+<hr>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video id="video_smaple" controls></video>
+
+<script>
+if(Hls.isSupported()) {
+	var video = document.getElementById('video_smaple');
+	var hls = new Hls();
+	hls.loadSource('https://rekion.dl.ndl.go.jp/offer/cts/grp001/contents/hlsPlaylist/strgpfs01_stream001/info:ndljp/pid/2915014/L0000001/L0000001.f4v.m3u8?tokenGenKey=8ffb082ccebb048c2d3e2d43bba385fadd717d3670eb3adab701cb880ec48136&time=1664957355760&token=eb8f261823f4fb63c0dfb6d0f33b8aecc327716e1ee8a1c450bc32f08b851c11');
+	hls.attachMedia(video);
+}
+</script>
+
+</body>
+</html>
