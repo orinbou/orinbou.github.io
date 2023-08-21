@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>【UMI_MAP】サンプル施設（堤防：芝30）</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./node_modules/leaflet/dist/leaflet.css" />
+  <script src="./node_modules/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <div id="map" style="height: 80vh;"></div>
+  <script>
+    let geojsonMarkerOptions = {
+      radius: 8,
+      fillColor: "#ff7800",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    };
+    var map = L.map('map', {
+      center: [35.6296, 139.7522],
+      zoom: 18
+    });
+    const backgroundLayer = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+    })
+    map.addLayer(backgroundLayer)
+
+    const polygonsWithCenters = L.layerGroup();
+
+    fetch('./UMI_MAP-Teibo-Shiba30.geojson')
+      .then(res => res.json())
+      .then(json => {
+        L.geoJson(json, {
+          style: ((feature) => {
+            return {
+              fillColor: 'red',
+              weight: 2,
+              opacity: 1,
+              color: 'white',  //Outline color
+              fillOpacity: 0.7
+            };
+          }),
+          onEachFeature: (feature, layer) => {
+            //学区ポリゴンの中心にマーカーを立てる
+            const center = layer.getBounds().getCenter();
+            const marker = L.marker(center)
+              .bindTooltip(feature.properties.SAFIELD000, {})
+              .on('click', () => {
+                //clickイベントを仕込めるので,APIコールして詳細情報を表示したり、詳細ページに飛ぶこともできる
+              })
+            const polygonAndItsCenter = L.layerGroup([layer, marker]);
+            polygonAndItsCenter.addTo(polygonsWithCenters);
+          },
+        }).addTo(map)
+        polygonsWithCenters.addTo(map);
+      })
+
+  </script>
+</body>
+
+</html>
